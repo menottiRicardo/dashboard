@@ -16,10 +16,10 @@ model Employee {
   updatedAt DateTime @updatedAt
   name      String
   lastname  String
-  cedula    String?
+  cedula    String
   phone     String?
   location  String?
-  shirts    String?
+  shirts    Int?
   boots     Boolean?
   paid      Boolean?
 }
