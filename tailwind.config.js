@@ -1,3 +1,4 @@
+const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   content: [
@@ -6,7 +7,9 @@ module.exports = {
     "./views/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    colors: {
+      ...colors,
+    },
   },
   plugins: [],
 };

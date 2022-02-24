@@ -4,7 +4,7 @@ import { useState } from "react";
 function Header() {
   const [show, setShow] = useState(false);
   return (
-    <header className="flex justify-between p-4 items-center shadow-md bg-blueGray-800 z-50">
+    <header className="flex justify-between p-4 items-center shadow-xl bg-blueGray-300 z-50">
       {/* left section */}
       <Link passHref href={"/"}>
         <div className="flex md:flex-grow cursor-pointer">
@@ -28,12 +28,14 @@ function Header() {
                 Descargas
               </a>
             </Link>
-            <span
-              className="hover:bg-gray-700 cursor-pointer hover:text-white rounded-full p-2"
-              onClick={() => setShow(!show)}
-            >
-              Empleados
-            </span>
+            <Link href={"/empleados"}>
+              <span
+                className="hover:bg-gray-700 cursor-pointer hover:text-white rounded-full p-2"
+                onClick={() => setShow(!show)}
+              >
+                Empleados
+              </span>
+            </Link>
           </div>
         </div>
       )}
