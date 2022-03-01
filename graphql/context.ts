@@ -7,10 +7,7 @@ export type Context = {
   prisma: PrismaClient;
 };
 
-export async function createContext(
-  req: NextApiRequest,
-  res: NextApiHandler
-): Promise<Context> {
+export async function createContext(): Promise<Context> {
   return {
     prisma,
   };

@@ -6,7 +6,6 @@ import { createContext } from "../../graphql/context";
 
 const apolloServer = new ApolloServer({
   schema,
-  resolvers,
   context: createContext,
 });
 

@@ -1,4 +1,11 @@
-import { extendType, objectType } from "nexus";
+import {
+  booleanArg,
+  extendType,
+  intArg,
+  nonNull,
+  objectType,
+  stringArg,
+} from "nexus";
 
 export const Employee = objectType({
   name: "Employee",
@@ -12,6 +19,7 @@ export const Employee = objectType({
     t.int("shirts");
     t.boolean("boots");
     t.boolean("paid");
+    t.date('createdAt');
   },
 });
 
@@ -22,6 +30,50 @@ export const EmployeeQuery = extendType({
       type: "Employee",
       resolve(_parent, _args, ctx) {
         return ctx.prisma.employee.findMany();
+      },
+    });
+  },
+});
+
+export const PostMutation = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("createEmployee", {
+      type: "Employee",
+      args: {
+        name: nonNull(stringArg()),
+        lastname: nonNull(stringArg()),
+        cedula: nonNull(stringArg()),
+        phone: stringArg(),
+        location: stringArg(),
+        shirts: intArg(),
+        boots: booleanArg(),
+        paid: booleanArg(),
+      },
+      async resolve(_root, args, ctx) {
+        const newEmployee: any = {
+          name: args.name,
+          lastname: args.lastname,
+          cedula: args.cedula,
+        };
+        if (args.phone) {
+          newEmployee.phone = args.phone;
+        }
+        if (args.location) {
+          newEmployee.location = args.location;
+        }
+        if (args.shirts) {
+          newEmployee.shirts = args.shirts;
+        }
+        if (args.boots) {
+          newEmployee.boots = args.boots;
+        }
+        if (args.paid) {
+          newEmployee.paid = args.paid;
+        }
+        return await ctx.prisma.employee.create({
+          data: newEmployee,
+        });
       },
     });
   },
