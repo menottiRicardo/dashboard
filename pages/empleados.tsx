@@ -13,31 +13,28 @@ const AllEmployeesQuery = gql`
       id
       name
       lastname
+      cedula
+      phone
+      location
+      shirts
+      boots
+      paid
     }
   }
 `;
 
 const Empleados = () => {
   const { data, error, loading } = useQuery(AllEmployeesQuery);
-  console.log(data);
+  // console.log(data);
 
   if (loading) return <p>loading....</p>;
-  // const [employee, setEmployee] = useState({
-  //   name: "",
-  //   lastname: "",
-  //   cedula: "",
-  //   phone: "",
-  //   location: "",
-  //   shirts: 2,
-  //   boots: false,
-  //   paid: false,
-  // });
+ 
 
   return (
-    <div className="bg-red-500">
+    <div className="bg-gray-50 h-screen">
       <CreateEmployee />
-      <div className="layout">
-        <Table />
+      <div className="layout pt-5">
+        <Table data={data}/>
       </div>
     </div>
   );
@@ -56,6 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-    },
+    }, 
+    revalidate:10
   };
 };
