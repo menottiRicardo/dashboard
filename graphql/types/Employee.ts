@@ -6,6 +6,7 @@ import {
   objectType,
   stringArg,
 } from "nexus";
+import { type } from "os";
 
 export const Employee = objectType({
   name: "Employee",
@@ -19,7 +20,7 @@ export const Employee = objectType({
     t.int("shirts");
     t.boolean("boots");
     t.boolean("paid");
-    t.date('createdAt');
+    t.field('createdAt', {type: 'Date'});
   },
 });
 
