@@ -65,6 +65,7 @@ const CreateEmployee = () => {
   const createEmployee = async () => {
     const variables: any = employee;
     const mutate = await create({ variables });
+    setOpen(true)
   };
   if (close) {
     return (
