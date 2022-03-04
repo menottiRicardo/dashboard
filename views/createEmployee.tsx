@@ -69,7 +69,7 @@ const CreateEmployee = () => {
 
   const createEmployee = async () => {
     const variables: any = employee;
-    console.log(variables)
+    console.log(variables);
     const mutate = await create({ variables });
     setOpen(true);
     setEmployee({
@@ -105,7 +105,7 @@ const CreateEmployee = () => {
         <h1 className="font-black text-2xl flex justify-center pb-3">
           Registrar Empleado
         </h1>
-        <form className="grid">
+        <form className="grid w-full">
           {/* nombre */}
           <div className="flex">
             <label htmlFor="name" className="font-medium">
@@ -115,7 +115,7 @@ const CreateEmployee = () => {
               type="text"
               name="name"
               placeholder="Ricardo"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.name}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
@@ -132,7 +132,7 @@ const CreateEmployee = () => {
               type="text"
               name="lastname"
               placeholder="Menotti"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.lastname}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
@@ -149,7 +149,7 @@ const CreateEmployee = () => {
               type="text"
               name="cedula"
               placeholder="8-957-2190"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.cedula}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
@@ -166,7 +166,7 @@ const CreateEmployee = () => {
               type="text"
               name="phone"
               placeholder="63760173"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.phone}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
@@ -183,7 +183,7 @@ const CreateEmployee = () => {
               type="text"
               name="location"
               placeholder="Las Cumbres"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.location}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
@@ -191,16 +191,16 @@ const CreateEmployee = () => {
             />
           </div>
 
-           {/* shirts */}
-           <div className="flex">
+          {/* shirts */}
+          <div className="flex">
             <label htmlFor="name" className="font-medium">
               Sueteres:
             </label>
             <input
-              type='number'
+              type="number"
               name="shirts"
               placeholder="Las Cumbres"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.shirts}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
@@ -208,7 +208,7 @@ const CreateEmployee = () => {
             />
           </div>
           {/* botas */}
-          <div className="flex justify-between">
+          <div className="flex justify-around">
             {/* botas */}
             <div>
               <input
@@ -225,7 +225,7 @@ const CreateEmployee = () => {
               />
               <label
                 htmlFor="checkbox-1"
-                className="text-sm ml-3 font-medium text-gray-900"
+                className="text-sm ml font-medium text-gray-900"
               >
                 Botas
               </label>
@@ -269,7 +269,7 @@ const CreateEmployee = () => {
               />
               <label
                 htmlFor="checkbox-3"
-                className="text-sm ml-3 font-medium text-gray-900"
+                className="text-sm ml-1 font-medium text-gray-900"
               >
                 Pagado
               </label>
