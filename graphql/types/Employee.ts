@@ -19,8 +19,8 @@ export const Employee = objectType({
     t.int("shirts");
     t.boolean("boots");
     t.boolean("paid");
-    t.boolean('casco')
-    t.field('createdAt', {type: 'Date'});
+    t.boolean("casco");
+    t.field("createdAt", { type: "Date" });
   },
 });
 
@@ -50,7 +50,7 @@ export const PostMutation = extendType({
         shirts: intArg(),
         boots: booleanArg(),
         paid: booleanArg(),
-        casco: booleanArg()
+        casco: booleanArg(),
       },
       async resolve(_root, args, ctx) {
         const newEmployee: any = {
