@@ -1,17 +1,19 @@
 import { MenuIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 function Header() {
   const [show, setShow] = useState(false);
+  const router = useRouter()
   return (
     <header className="flex justify-between p-4 items-center shadow-xl bg-blueGray-300 z-50">
       {/* left section */}
-      <Link passHref href={"/"}>
-        <div className="flex md:flex-grow cursor-pointer">
+      
+        <div className="flex md:flex-grow cursor-pointer" onClick={() => router.reload()}>
           Metroclean
         </div>
-      </Link>
+      
       <button onClick={() => setShow(!show)}><MenuIcon className="w-5"/></button>
       {show && (
         <div className="fixed w-full h-full bg-black flex items-center justify-center bg-opacity-90 z-50 select-none px-4 inset-0">
@@ -36,6 +38,14 @@ function Header() {
               >
                 Empleados
               </span>
+            </Link>
+            <Link href={"/clientes"}>
+              <a
+                className="hover:bg-gray-700 cursor-pointer hover:text-white rounded-full p-2"
+                onClick={() => setShow(!show)}
+              >
+                Clientes
+              </a>
             </Link>
           </div>
         </div>

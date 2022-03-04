@@ -2,6 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type Client {
+  id: String
+  image: String
+  location: String
+  name: String
+  subClients: [Subclient]
+}
+
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -9,6 +17,7 @@ scalar Date
 
 type Employee {
   boots: Boolean
+  casco: Boolean
   cedula: String
   createdAt: Date
   id: String
@@ -21,9 +30,14 @@ type Employee {
 }
 
 type Mutation {
-  createEmployee(boots: Boolean, cedula: String!, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
+  createEmployee(boots: Boolean, casco: Boolean, cedula: String!, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
 }
 
 type Query {
   employees: [Employee]!
+}
+
+type Subclient {
+  id: String
+  name: String
 }

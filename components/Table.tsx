@@ -4,6 +4,7 @@ import React from "react";
 const Table = ({ data }) => {
   const employees = data?.employees;
   const tableTitles = Object.keys(employees?.[0]).slice(2);
+  console.log(tableTitles)
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -53,6 +54,9 @@ const Table = ({ data }) => {
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                     {employee?.paid?.toString()}
+                    </td>
+                    <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                    {employee?.casco?.toString()}
                     </td>
                     <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                       <a

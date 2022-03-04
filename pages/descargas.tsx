@@ -1,21 +1,11 @@
-import React, { useState } from "react";
-import Button from "../components/Button";
+
 import DownloadCard from "../components/DownloadCard";
 import Createdownload from "../views/Createdownload";
 
 const Descargas = () => {
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
   return (
     <div className="bg-gray-50">
-      <div className="flex items-center justify-center pt-2 layout">
-        <Button
-          color="bg-blueGray-900"
-          text="Registrar Descarga"
-          textColor="text-white"
-          onClick={() => console.log("clicked")}
-        />
-      </div>
-      {showRegisterModal && <Createdownload />}
+      <Createdownload />
 
       {/* week days */}
       <div className="layout">

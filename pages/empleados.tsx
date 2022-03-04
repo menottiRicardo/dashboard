@@ -19,6 +19,7 @@ const AllEmployeesQuery = gql`
       shirts
       boots
       paid
+      casco
     }
   }
 `;

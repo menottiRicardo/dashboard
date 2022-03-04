@@ -6,7 +6,6 @@ import {
   objectType,
   stringArg,
 } from "nexus";
-import { type } from "os";
 
 export const Employee = objectType({
   name: "Employee",
@@ -20,6 +19,7 @@ export const Employee = objectType({
     t.int("shirts");
     t.boolean("boots");
     t.boolean("paid");
+    t.boolean('casco')
     t.field('createdAt', {type: 'Date'});
   },
 });
@@ -50,6 +50,7 @@ export const PostMutation = extendType({
         shirts: intArg(),
         boots: booleanArg(),
         paid: booleanArg(),
+        casco: booleanArg()
       },
       async resolve(_root, args, ctx) {
         const newEmployee: any = {
@@ -71,6 +72,9 @@ export const PostMutation = extendType({
         }
         if (args.paid) {
           newEmployee.paid = args.paid;
+        }
+        if (args.casco) {
+          newEmployee.paid = args.casco;
         }
         return await ctx.prisma.employee.create({
           data: newEmployee,

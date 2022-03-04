@@ -11,9 +11,9 @@ datasource db {
 }
 
 model Employee {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   name      String
   lastname  String
   cedula    String
@@ -22,4 +22,34 @@ model Employee {
   shirts    Int?
   boots     Boolean?
   paid      Boolean?
+  casco     Boolean?
+  descargas Descarga[]
+}
+
+model Descarga {
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  client    String
+  subClient String
+  employees Employee[]
+}
+
+model Client {
+  id         String      @id @default(uuid())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  name       String
+  location   String
+  image      String
+  subClients SubClient[]
+}
+
+model SubClient {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  client    Client?  @relation(fields: [clientId], references: [id])
+  clientId  String?
 }

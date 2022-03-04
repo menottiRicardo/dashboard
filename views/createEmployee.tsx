@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { type } from "os";
 import React, { useState } from "react";
 import Button from "../components/Button";
 
@@ -9,9 +10,10 @@ const CreateEmployee = () => {
     cedula: "",
     phone: "",
     location: "",
-    shirts: 2,
+    shirts: 0,
     boots: false,
     paid: false,
+    casco: false,
   });
 
   const [close, setOpen] = useState(true);
@@ -26,6 +28,7 @@ const CreateEmployee = () => {
       $shirts: Int
       $boots: Boolean
       $paid: Boolean
+      $casco: Boolean
     ) {
       createEmployee(
         name: $name
@@ -36,6 +39,7 @@ const CreateEmployee = () => {
         shirts: $shirts
         boots: $boots
         paid: $paid
+        casco: $casco
       ) {
         name
         lastname
@@ -45,11 +49,12 @@ const CreateEmployee = () => {
         shirts
         boots
         paid
+        casco
       }
     }
   `);
   const handleInputs = (inputName, inputValue) => {
-    if (inputName === "shirt") {
+    if (inputName === "shirts") {
       setEmployee((prevState) => ({
         ...prevState,
         [inputName]: parseInt(inputValue),
@@ -64,8 +69,20 @@ const CreateEmployee = () => {
 
   const createEmployee = async () => {
     const variables: any = employee;
+    console.log(variables)
     const mutate = await create({ variables });
-    setOpen(true)
+    setOpen(true);
+    setEmployee({
+      name: "",
+      lastname: "",
+      cedula: "",
+      phone: "",
+      location: "",
+      shirts: 0,
+      boots: false,
+      paid: false,
+      casco: false,
+    });
   };
   if (close) {
     return (
@@ -172,6 +189,91 @@ const CreateEmployee = () => {
                 handleInputs(e.target.name, e.target.value)
               }
             />
+          </div>
+
+           {/* shirts */}
+           <div className="flex">
+            <label htmlFor="name" className="font-medium">
+              Sueteres:
+            </label>
+            <input
+              type='number'
+              name="shirts"
+              placeholder="Las Cumbres"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              value={employee.shirts}
+              onChange={(e) =>
+                handleInputs(e.target.name, e.target.value)
+              }
+            />
+          </div>
+          {/* botas */}
+          <div className="flex justify-between">
+            {/* botas */}
+            <div>
+              <input
+                id="checkbox-1"
+                aria-describedby="checkbox-1"
+                type="checkbox"
+                className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+                onChange={(e) =>
+                  setEmployee({
+                    ...employee,
+                    boots: e.target.checked,
+                  })
+                }
+              />
+              <label
+                htmlFor="checkbox-1"
+                className="text-sm ml-3 font-medium text-gray-900"
+              >
+                Botas
+              </label>
+            </div>
+
+            {/* casco */}
+            <div>
+              <input
+                id="checkbox-2"
+                aria-describedby="checkbox-2"
+                type="checkbox"
+                className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+                onChange={(e) =>
+                  setEmployee({
+                    ...employee,
+                    casco: e.target.checked,
+                  })
+                }
+              />
+              <label
+                htmlFor="checkbox-2"
+                className="text-sm ml-3 font-medium text-gray-900"
+              >
+                Casco
+              </label>
+            </div>
+
+            {/* Pagado */}
+            <div>
+              <input
+                id="checkbox-3"
+                aria-describedby="checkbox-3"
+                type="checkbox"
+                className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+                onChange={(e) =>
+                  setEmployee({
+                    ...employee,
+                    paid: e.target.checked,
+                  })
+                }
+              />
+              <label
+                htmlFor="checkbox-3"
+                className="text-sm ml-3 font-medium text-gray-900"
+              >
+                Pagado
+              </label>
+            </div>
           </div>
         </form>
         <div className="flex justify-around items-center mt-4">
