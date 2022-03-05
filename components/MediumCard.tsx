@@ -31,12 +31,6 @@ export const MediumCard = ({ size }: CardProps) => {
           <p>year</p>
         </div>
       </div>
-      {showBottom && (
-        <BottomSheet
-          open={() => setShowBottom(!showBottom)}
-          isOpen={showBottom}
-        />
-      )}
     </>
   );
 };

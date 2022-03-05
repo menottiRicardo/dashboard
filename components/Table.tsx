@@ -2,7 +2,8 @@ import { Employee } from "@prisma/client";
 import React from "react";
 
 const Table = ({ data }) => {
-  const employees = data?.employees;
+  const employees = data?.allEmployees;
+  console.log(employees)
   const tableTitles = Object.keys(employees?.[0]).slice(2);
   console.log(tableTitles)
   return (

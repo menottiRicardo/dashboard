@@ -30,11 +30,13 @@ type Employee {
 }
 
 type Mutation {
+  createClient(image: String!, location: String!, name: String!, subclient: String): Client!
   createEmployee(boots: Boolean, casco: Boolean, cedula: String!, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
 }
 
 type Query {
-  employees: [Employee]!
+  allClients: [Client]!
+  allEmployees: [Employee]!
 }
 
 type Subclient {

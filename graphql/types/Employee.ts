@@ -27,7 +27,7 @@ export const Employee = objectType({
 export const EmployeeQuery = extendType({
   type: "Query",
   definition(t) {
-    t.nonNull.list.field("employees", {
+    t.nonNull.list.field("allEmployees", {
       type: "Employee",
       resolve(_parent, _args, ctx) {
         return ctx.prisma.employee.findMany();

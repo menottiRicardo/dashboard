@@ -1,42 +1,69 @@
+import { gql, useMutation } from "@apollo/client";
+import { PlusIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import Button from "../components/Button";
+import { SubClient } from "../graphql/types";
 
 const CreateClient = () => {
   const [client, setClient] = useState({
     name: "",
     location: "",
     image: "",
-    subclient: [],
+    subclient: "",
   });
+
+  const [subclients, setSubclients] = useState([]);
+
   const [selectedFile, setSelectedFile] = useState<any>();
   const [close, setClose] = useState(true);
-  const handleInputs = (inputName, inputValue) => {
-    if (inputName === "shirt") {
-      setClient((prevState) => ({
-        ...prevState,
-        [inputName]: parseInt(inputValue),
-      }));
-    } else {
-      setClient((prevState) => ({
-        ...prevState,
-        [inputName]: inputValue,
-      }));
+
+  const [create, { loading, error }] = useMutation(gql`
+    mutation (
+      $name: String
+      $location: String
+      $image: String
+      $subclient: String
+    ) {
+      createClient(
+        name: $name
+        location: $location
+        image: $image
+        subclient: $subclient
+      ) {
+        name
+        location
+        image
+        subclient
+      }
     }
+  `);
+
+  const handleInputs = (inputName, inputValue) => {
+    setClient((prevState) => ({
+      ...prevState,
+      [inputName]: inputValue,
+    }));
+  };
+
+  const addSubClient = () => {
+    setSubclients([...subclients, client.subclient]);
+    setClient({ ...client, subclient: "" });
   };
 
   const createEmployee = async () => {
-    // const variables: any = employee;
-    // const mutate = await create({ variables });
-    setClose(true);
+    client.subclient = subclients[0]
+    const variables: any = client;
+    console.log(variables);
+    const mutate = await create({ variables });
+    console.log("error", error);
+    console.log(mutate, error);
+    // setClose(true);
+    // setSubclients([]);
     // setClient({
     //   name: "",
-    //   lastname: "",
-    //   cedula: "",
-    //   phone: "",
     //   location: "",
-    //   shirts: 0,
-    //   boots: false,
-    //   paid: false,
+    //   image: "",
+    //   subclient: "",
     // });
   };
   const fileHandler = (event: any) => {
@@ -55,13 +82,15 @@ const CreateClient = () => {
       </div>
     );
   }
+
+  // console.log(subclients);
   return (
     <div className="fixed w-full h-full bg-black flex items-center justify-center bg-opacity-90 z-50 select-none px-4 inset-0">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 rounded-md shadow-xl px-2 py-3 grid select-none bg-white">
         {/* text */}
         {/* Select client */}
         <h1 className="font-black text-2xl flex justify-center pb-3">
-          Registrar Empleado
+          Nuevo Cliente
         </h1>
         <form className="grid">
           {/* nombre */}
@@ -72,7 +101,7 @@ const CreateClient = () => {
             <input
               type="text"
               name="name"
-              placeholder="Ricardo"
+              placeholder="Metroclean Services"
               className="border-3 border-blue-600 ml-1 outline-none mb-3"
               value={client.name}
               onChange={(e) =>
@@ -89,13 +118,44 @@ const CreateClient = () => {
             <input
               type="text"
               name="location"
-              placeholder="Las Cumbres"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              placeholder="Panama Pacifico"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-8/12"
               value={client.location}
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
               }
             />
+          </div>
+
+          {/* sub clientes */}
+          <div className="grid">
+            <label htmlFor="name" className="font-medium">
+              SubClientes:
+            </label>
+            <div className="flex justify-between items-center">
+              <input
+                type="text"
+                name="subclient"
+                placeholder="Pozuelo"
+                className="border-3 border-blue-600 ml-1 outline-none mb-3 w-8/12"
+                value={client.subclient}
+                onChange={(e) =>
+                  handleInputs(e.target.name, e.target.value)
+                }
+              />
+
+              <div className="p-2">
+                <PlusIcon className="w-5" onClick={addSubClient} />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            {subclients?.map((sub) => (
+              <p className="bg-green-300 m-1 p-1 rounded-full flex items-center justify-center font-medium">
+                {sub}
+              </p>
+            ))}
           </div>
 
           <div className="grid">

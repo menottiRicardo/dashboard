@@ -39,9 +39,9 @@ model Client {
   id         String      @id @default(uuid())
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  name       String
-  location   String
-  image      String
+  name       String?
+  location   String?
+  image      String?
   subClients SubClient[]
 }
 

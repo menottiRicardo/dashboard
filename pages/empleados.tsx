@@ -1,7 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import React, { useState } from "react";
-import Button from "../components/Button";
 import Table from "../components/Table";
 import { createContext } from "../graphql/context";
 import { initializeApollo } from "../lib/apollo";
@@ -9,7 +8,7 @@ import CreateEmployee from "../views/createEmployee";
 
 const AllEmployeesQuery = gql`
   query {
-    employees {
+    allEmployees {
       id
       name
       lastname
@@ -26,7 +25,7 @@ const AllEmployeesQuery = gql`
 
 const Empleados = () => {
   const { data, error, loading } = useQuery(AllEmployeesQuery);
-  // console.log(data);
+  console.log(data);
 
   if (loading) return <p>loading....</p>;
  
