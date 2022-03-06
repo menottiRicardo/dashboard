@@ -67,14 +67,14 @@ const CreateClient = () => {
     }
 
     console.log(error);
-    // setClose(true);
-    // setSubclients([]);
-    // setClient({
-    //   name: "",
-    //   location: "",
-    //   image: "",
-    //   subclient: "",
-    // });
+    setClose(true);
+    setSubclients([]);
+    setClient({
+      name: "",
+      location: "",
+      image: "",
+      subclient: "",
+    });
   };
   const fileHandler = (event: any) => {
     setSelectedFile(event.target.files[0]);

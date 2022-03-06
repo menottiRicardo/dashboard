@@ -38,6 +38,7 @@ type Query {
   allClients: [Client]!
   allEmployees: [Employee]!
   allSubclients: [Subclient]!
+  employee(id: String!): Employee!
 }
 
 type Subclient {

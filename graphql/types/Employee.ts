@@ -1,11 +1,13 @@
 import {
   booleanArg,
   extendType,
+  idArg,
   intArg,
   nonNull,
   objectType,
   stringArg,
 } from "nexus";
+import { resolve } from "path/posix";
 
 export const Employee = objectType({
   name: "Employee",
@@ -29,8 +31,26 @@ export const EmployeeQuery = extendType({
   definition(t) {
     t.nonNull.list.field("allEmployees", {
       type: "Employee",
-      resolve(_parent, _args, ctx) {
-        return ctx.prisma.employee.findMany();
+      async resolve(_parent, _args, ctx) {
+        return await ctx.prisma.employee.findMany();
+      },
+    });
+  },
+});
+
+export const EmployeeByIDQuery = extendType({
+  type: "Query",
+  definition(t) {
+    t.nonNull.field("employee", {
+      type: "Employee",
+      args: { id: nonNull(stringArg()) },
+      resolve(_parent, args, ctx) {
+        const link = ctx.prisma.employee.findUnique({
+          where: {
+            id: args.id,
+          },
+        });
+        return link;
       },
     });
   },

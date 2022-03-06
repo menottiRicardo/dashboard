@@ -1,11 +1,16 @@
 import { useQuery, gql } from "@apollo/client";
 import { GetStaticProps } from "next";
-import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import React, { useEffect, useState } from "react";
+// import BottomSheet from "../components/employee/BottomSheet";
 import Table from "../components/Table";
 import { createContext } from "../graphql/context";
 import { initializeApollo } from "../lib/apollo";
 import CreateEmployee from "../views/createEmployee";
 
+const BottomSheet = dynamic(
+  () => import("../components/employee/BottomSheet")
+);
 const AllEmployeesQuery = gql`
   query {
     allEmployees {
@@ -24,17 +29,30 @@ const AllEmployeesQuery = gql`
 `;
 
 const Empleados = () => {
+  const [id, setId] = useState("");
+  const [showBottom, setShowBottom] = useState(false);
   const { data, error, loading } = useQuery(AllEmployeesQuery);
-  console.log(data);
+  console.log(id);
 
   if (loading) return <p>loading....</p>;
- 
 
+  useEffect(() => {
+    if (id !== "") {
+      setShowBottom(true);
+    }
+  }, [id]);
   return (
     <div className="bg-gray-50 h-screen">
       <CreateEmployee />
       <div className="layout pt-5">
-        <Table data={data}/>
+        <Table data={data} setId={setId} />
+        {showBottom && (
+          <BottomSheet
+            isOpen={showBottom}
+            open={() => setShowBottom(false)}
+            id={id}
+          />
+        )}
       </div>
     </div>
   );
@@ -43,7 +61,7 @@ const Empleados = () => {
 export default Empleados;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const ctx = await createContext()
+  const ctx = await createContext();
   const apolloClient = initializeApollo(null, ctx);
 
   await apolloClient.query({
@@ -53,7 +71,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-    }, 
-    revalidate:10
+    },
+    revalidate: 10,
   };
 };
