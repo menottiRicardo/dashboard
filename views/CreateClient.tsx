@@ -18,22 +18,14 @@ const CreateClient = () => {
   const [close, setClose] = useState(true);
 
   const [create, { loading, error }] = useMutation(gql`
-    mutation (
-      $name: String
-      $location: String
-      $image: String
-      $subclient: String
-    ) {
-      createClient(
-        name: $name
-        location: $location
-        image: $image
-        subclient: $subclient
-      ) {
+    mutation ($createClientInput: createClientInput!) {
+      createClient(createClientInput: $createClientInput) {
         name
         location
         image
-        subclient
+        subClients {
+          name
+        }
       }
     }
   `);
@@ -46,17 +38,35 @@ const CreateClient = () => {
   };
 
   const addSubClient = () => {
-    setSubclients([...subclients, client.subclient]);
+    setSubclients([...subclients, { name: client.subclient }]);
     setClient({ ...client, subclient: "" });
   };
 
   const createEmployee = async () => {
-    client.subclient = subclients[0]
-    const variables: any = client;
-    console.log(variables);
-    const mutate = await create({ variables });
-    console.log("error", error);
-    console.log(mutate, error);
+    // client.subclient = subclients[0];
+    const { subclient, ...data } = client;
+    const createClientInput = {
+      ...data,
+      subclients: subclients,
+    };
+
+    const variables: any = {
+      createClientInput: {
+        ...data,
+        subClients: subclients,
+      },
+    };
+
+    
+    console.log(variables.createClientInput.subClients.map((i) => console.log(i)));
+    try {
+      const mutate = await create({ variables });
+      console.log(mutate)
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(error);
     // setClose(true);
     // setSubclients([]);
     // setClient({
@@ -153,7 +163,7 @@ const CreateClient = () => {
           <div>
             {subclients?.map((sub) => (
               <p className="bg-green-300 m-1 p-1 rounded-full flex items-center justify-center font-medium">
-                {sub}
+                {sub.name}
               </p>
             ))}
           </div>
