@@ -37,6 +37,80 @@ const BottomSheet = ({ open, isOpen, id }: BottomSheetProps) => {
     paid: false,
     casco: false,
   });
+  const [create] = useMutation(gql`
+    mutation (
+      $id: String
+      $name: String!
+      $lastname: String!
+      $cedula: String!
+      $phone: String
+      $location: String
+      $shirts: Int
+      $boots: Boolean
+      $paid: Boolean
+      $casco: Boolean
+    ) {
+      updateEmployee(
+        id: $id
+        name: $name
+        lastname: $lastname
+        cedula: $cedula
+        phone: $phone
+        location: $location
+        shirts: $shirts
+        boots: $boots
+        paid: $paid
+        casco: $casco
+      ) {
+        id
+        name
+        lastname
+        cedula
+        phone
+        location
+        shirts
+        boots
+        paid
+        casco
+      }
+    }
+  `);
+  const [eliminate] = useMutation(gql`
+    mutation ($id: String!) {
+      deleteEmployee(id: $id) {
+        id
+      }
+    }
+  `);
+  const handleInputs = (inputName, inputValue) => {
+    if (inputName === "shirts") {
+      setEmployee((prevState) => ({
+        ...prevState,
+        [inputName]: parseInt(inputValue),
+      }));
+    } else {
+      setEmployee((prevState) => ({
+        ...prevState,
+        [inputName]: inputValue,
+      }));
+    }
+  };
+
+  const updateEmployee = async () => {
+    const variables: any = employee;
+    variables.id = id;
+    const mutate = await create({ variables });
+    console.log(mutate);
+    open(false);
+  };
+
+  const eliminateEmployee = async () => {
+    const variables: any = {};
+    variables.id = id;
+    const mutate = await eliminate({ variables });
+    console.log(mutate);
+    open(false);
+  };
 
   const { data, error, loading } = useQuery(GetEmployee, {
     variables: { employeeId: id },
@@ -245,16 +319,16 @@ const BottomSheet = ({ open, isOpen, id }: BottomSheetProps) => {
                 <Button
                   color="bg-red"
                   border="border-2 border-red-800"
-                  text={"Cancelar"}
+                  text={"Eliminar"}
                   textColor="text-black"
-                  onClick={() => open(false)}
+                  onClick={eliminateEmployee}
                 />
                 <Button
                   color="bg-green-500"
                   border="border-2 border-green-500"
-                  text={"Cancelar"}
+                  text={"Guardar"}
                   textColor="text-black"
-                  onClick={() => console.log("hola")}
+                  onClick={updateEmployee}
                 />
               </div>
             </div>

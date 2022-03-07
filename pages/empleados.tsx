@@ -31,16 +31,16 @@ const AllEmployeesQuery = gql`
 const Empleados = () => {
   const [id, setId] = useState("");
   const [showBottom, setShowBottom] = useState(false);
-  const { data, error, loading } = useQuery(AllEmployeesQuery);
-  console.log(id);
-
-  if (loading) return <p>loading....</p>;
-
   useEffect(() => {
     if (id !== "") {
       setShowBottom(true);
     }
   }, [id]);
+  const { data, error, loading } = useQuery(AllEmployeesQuery);
+  console.log(id);
+
+  if (loading) return <p>loading....</p>;
+
   return (
     <div className="bg-gray-50 h-screen">
       <CreateEmployee />

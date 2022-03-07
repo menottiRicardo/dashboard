@@ -103,3 +103,74 @@ export const PostMutation = extendType({
     });
   },
 });
+
+export const UpdateEmployee = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("updateEmployee", {
+      type: "Employee",
+      args: {
+        id: stringArg(),
+        name: nonNull(stringArg()),
+        lastname: nonNull(stringArg()),
+        cedula: nonNull(stringArg()),
+        phone: stringArg(),
+        location: stringArg(),
+        shirts: intArg(),
+        boots: booleanArg(),
+        paid: booleanArg(),
+        casco: booleanArg(),
+      },
+      async resolve(_parent, args, ctx) {
+        const newEmployee: any = {
+          name: args.name,
+          lastname: args.lastname,
+          cedula: args.cedula,
+        };
+        if (args.phone) {
+          newEmployee.phone = args.phone;
+        }
+        if (args.location) {
+          newEmployee.location = args.location;
+        }
+        if (args.shirts) {
+          newEmployee.shirts = args.shirts;
+        }
+        if (args.boots) {
+          newEmployee.boots = args.boots;
+        }
+        if (args.paid) {
+          newEmployee.paid = args.paid;
+        }
+        if (args.casco) {
+          newEmployee.casco = args.casco;
+        }
+        return await ctx.prisma.employee.update({
+          where: {
+            id: args.id,
+          },
+          data: newEmployee,
+        });
+      },
+    });
+  },
+});
+
+export const DeleteEmployee = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("deleteEmployee", {
+      type: "Employee",
+      args: {
+        id: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, ctx) {
+        return await ctx.prisma.employee.delete({
+          where: {
+            id: args.id,
+          },
+        });
+      },
+    });
+  },
+});
