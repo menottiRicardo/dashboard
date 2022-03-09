@@ -32,7 +32,7 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
                 <PlusCircleIcon className="w-5" />
               </div>
               {client?.subClients?.map((sub) => (
-                <p>{sub.name}</p>
+                <p key={sub.id}>{sub.name}</p>
               ))}
 
               <div className="flex justify-around items-center mt-5">
