@@ -40,7 +40,7 @@ const Empleados = () => {
   console.log(id);
 
   if (loading) return <p>loading....</p>;
-
+  console.log(showBottom);
   return (
     <div className="bg-gray-50 h-screen">
       <CreateEmployee />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 interface ButtonProps {
   color: string;
@@ -24,4 +24,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default memo(Button);

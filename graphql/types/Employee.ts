@@ -1,13 +1,11 @@
 import {
   booleanArg,
   extendType,
-  idArg,
   intArg,
   nonNull,
   objectType,
   stringArg,
 } from "nexus";
-import { resolve } from "path/posix";
 
 export const Employee = objectType({
   name: "Employee",
@@ -56,7 +54,7 @@ export const EmployeeByIDQuery = extendType({
   },
 });
 
-export const PostMutation = extendType({
+export const CreateEmployee = extendType({
   type: "Mutation",
   definition(t) {
     t.nonNull.field("createEmployee", {

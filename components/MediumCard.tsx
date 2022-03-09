@@ -1,18 +1,22 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
-import BottomSheet from "./BottomSheet";
 
+const BottomSheet = dynamic(() => import("./client/BottomSheet"));
 interface CardProps {
-  size?: String;
+  client?: {
+    name: string;
+    location: string;
+  };
 }
-export const MediumCard = ({ size }: CardProps) => {
-  const [showBottom, setShowBottom] = useState(false);
-
+export const MediumCard = ({ client }: CardProps) => {
+  // bottom sheet
+  const [isOpen, setOpen] = useState(false);
   return (
     <>
       <div
         className="bg-white rounded-xl shadow-md mt-4 relative"
-        onClick={() => setShowBottom(true)}
+        onClick={() => setOpen(true)}
       >
         {/* image */}
         <div className="h-1/2">
@@ -26,11 +30,18 @@ export const MediumCard = ({ size }: CardProps) => {
         </div>
 
         <div className="h-1/2 flex justify-between p-2">
-          <h1 className="font-medium">Blu Logistics</h1>
-          <p>Location</p>
-          <p>year</p>
+          <h1 className="font-medium">{client.name}</h1>
+          <p>{client.location}</p>
+          <p>2021</p>
         </div>
       </div>
+      {isOpen && (
+        <BottomSheet
+          isOpen={isOpen}
+          setOpen={() => setOpen(false)}
+          client={client}
+        />
+      )}
     </>
   );
 };

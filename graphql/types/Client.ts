@@ -56,6 +56,7 @@ export const createClientInput = inputObjectType({
     t.field("subClients", { type: list(createSubInput) });
   },
 });
+
 export const CreateClient = extendType({
   type: "Mutation",
   definition(t) {
@@ -70,12 +71,49 @@ export const CreateClient = extendType({
           location: args.createClientInput.location,
           image: args.createClientInput.image,
           subclients: {
-            create: args.createClientInput.subClients
+            create: args.createClientInput.subClients,
           },
         };
 
         return await ctx.prisma.client.create({
-          data: newClient
+          data: newClient,
+        });
+      },
+    });
+  },
+});
+
+export const ClientByIDQuery = extendType({
+  type: "Query",
+  definition(t) {
+    t.nonNull.field("client", {
+      type: "Client",
+      args: { id: nonNull(stringArg()) },
+      resolve(_parent, args, ctx) {
+        const link = ctx.prisma.client.findUnique({
+          where: {
+            id: args.id,
+          },
+        });
+        return link;
+      },
+    });
+  },
+});
+
+export const DeleteClient = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("deleteClient", {
+      type: "Client",
+      args: {
+        id: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, ctx) {
+        return await ctx.prisma.client.delete({
+          where: {
+            id: args.id,
+          },
         });
       },
     });

@@ -1,5 +1,4 @@
 import { gql, useMutation } from "@apollo/client";
-import { type } from "os";
 import React, { useState } from "react";
 import Button from "../components/Button";
 
