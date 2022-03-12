@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
-import { MediumCard } from "../components/MediumCard";
+import { ClientCard } from "../components/ClientCard";
 import CreateClient from "../views/CreateClient";
 
 const queryAllClients = gql`
@@ -72,7 +72,7 @@ const Clientes = () => {
       <div className="layout">
         <h1 className="font-black text-3xl">Clientes</h1>
         {data?.allClients?.map((client) => (
-          <MediumCard key={client.id} client={client} />
+          <ClientCard key={client.id} client={client} />
         ))}
       </div>
     </div>

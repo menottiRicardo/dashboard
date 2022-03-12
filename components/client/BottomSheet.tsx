@@ -8,6 +8,7 @@ import {
   SaveIcon,
   XCircleIcon,
 } from "@heroicons/react/outline";
+import Image from "next/image";
 import React, { SetStateAction, useState } from "react";
 import Sheet from "react-modal-sheet";
 import Button from "../Button";
@@ -70,11 +71,23 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
           <Sheet.Header />
           <Sheet.Content>
             <div className="p-2">
-              
-              <h1 className="font-black text-2xl">{client.name}</h1>
-              <p>{client.location}</p>
-              <div className="w-full bg-gray-500 h-[1px] mt-2"></div>
+              <div className="flex px-2">
+                <div className="w-1/4">
+                  <h1 className="font-black text-2xl">
+                    {client.name}
+                  </h1>
+                  <p>{client.location}</p>
+                </div>
 
+                <div className="w-full relative">
+                  <Image
+                    src={"/building.jpg"}
+                    layout="fill"
+                    className="rounded-xl"
+                  />
+                </div>
+              </div>
+              <div className="w-full bg-gray-500 h-[1px] mt-2"></div>
               <div
                 className="flex justify-around items-center mt-2 px-2"
                 onClick={() => setShow(!show)}
@@ -112,9 +125,9 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
                 <ClipboardListIcon className="w-5" />
               </div>
               {client?.subClients?.map((sub) => (
-                <div className="flex space-x-1">
+                <div key={sub.id} className="flex space-x-1">
                   <PuzzleIcon className="w-5 text-black" />
-                  <p className="text-gray-700" key={sub.id}>
+                  <p className="text-gray-700" >
                     {sub.name}
                   </p>
                 </div>
@@ -127,7 +140,9 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
                   text={"Eliminar"}
                   textColor="text-black"
                   onClick={deleteClientById}
-                  icon={<XCircleIcon className="w-5 text-red-900 ml-2"/>}
+                  icon={
+                    <XCircleIcon className="w-5 text-red-900 ml-2" />
+                  }
                 />
                 <Button
                   color="bg-green-500"
@@ -135,7 +150,9 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
                   text={"Guardar"}
                   textColor="text-white"
                   onClick={() => console.log("")}
-                  icon={<SaveIcon className="w-5 text-white ml-2 transfrom transition-all duration-75 active:scale-105 ease-out"/>}
+                  icon={
+                    <SaveIcon className="w-5 text-white ml-2 transfrom transition-all duration-75 active:scale-105 ease-out" />
+                  }
                 />
               </div>
             </div>

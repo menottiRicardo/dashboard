@@ -9,7 +9,7 @@ interface CardProps {
     location: string;
   };
 }
-export const MediumCard = ({ client }: CardProps) => {
+export const ClientCard = ({ client }: CardProps) => {
   // bottom sheet
   const [isOpen, setOpen] = useState(false);
   return (
