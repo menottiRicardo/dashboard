@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { PlusIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import Button from "../components/Button";
 
@@ -92,6 +93,7 @@ const CreateEmployee = () => {
           text={"Registar"}
           textColor="text-white"
           onClick={() => setOpen(false)}
+          icon={<PlusIcon className="w-5 text-white ml-2" />}
         />
       </div>
     );

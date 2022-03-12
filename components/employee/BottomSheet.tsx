@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useMutation, gql, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
-import Sheet, { SheetRef } from "react-modal-sheet";
+import { useState } from "react";
+import Sheet from "react-modal-sheet";
 import Button from "../Button";
 
 interface BottomSheetProps {
@@ -123,7 +123,6 @@ const BottomSheet = ({ open, isOpen, id }: BottomSheetProps) => {
   const setToEdit = () => {
     const { __typename, ...restData } = data.employee;
     setEmployee({ ...employee, ...restData });
-    console.log(restData);
   };
   console.log(employee);
   return (
@@ -254,6 +253,7 @@ const BottomSheet = ({ open, isOpen, id }: BottomSheetProps) => {
                     id="checkbox-1"
                     aria-describedby="checkbox-1"
                     type="checkbox"
+                    checked={employee?.boots == true ? true : false}
                     className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
                     onChange={(e) =>
                       setEmployee({
@@ -276,6 +276,7 @@ const BottomSheet = ({ open, isOpen, id }: BottomSheetProps) => {
                     id="checkbox-2"
                     aria-describedby="checkbox-2"
                     type="checkbox"
+                    checked={employee?.casco == true ? true : false}
                     className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
                     onChange={(e) =>
                       setEmployee({
@@ -298,6 +299,7 @@ const BottomSheet = ({ open, isOpen, id }: BottomSheetProps) => {
                     id="checkbox-3"
                     aria-describedby="checkbox-3"
                     type="checkbox"
+                    checked={employee?.paid == true ? true : false}
                     className="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
                     onChange={(e) =>
                       setEmployee({

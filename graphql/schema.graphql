@@ -32,8 +32,10 @@ type Employee {
 type Mutation {
   createClient(createClientInput: createClientInput): Client!
   createEmployee(boots: Boolean, casco: Boolean, cedula: String!, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
+  createSubClient(clientId: String!, name: String!): Subclient!
   deleteClient(id: String!): Client!
   deleteEmployee(id: String!): Employee!
+  updateClient(id: String!): Client!
   updateEmployee(boots: Boolean, casco: Boolean, cedula: String!, id: String, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
 }
 
@@ -43,9 +45,11 @@ type Query {
   allSubclients: [Subclient]!
   client(id: String!): Client!
   employee(id: String!): Employee!
+  subclient(id: String!): Subclient!
 }
 
 type Subclient {
+  clientId: String
   id: String
   name: String
 }

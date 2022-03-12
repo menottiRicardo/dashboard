@@ -5,6 +5,7 @@ interface ButtonProps {
   text: string;
   textColor: string;
   border?: string;
+  icon?: React.ReactFragment;
   onClick: () => void;
 }
 const Button = ({
@@ -13,13 +14,15 @@ const Button = ({
   textColor,
   border,
   onClick,
+  icon = '',
 }: ButtonProps) => {
   return (
     <button
-      className={`${color} ${textColor} shadow-md px-3 py-2 rounded-2xl font-medium flex items-center justify-center ${border}`}
+      className={`${color} ${textColor} shadow-md md:cursor-pointer cursor-auto px-3 py-2 rounded-2xl font-medium flex items-center justify-center ${border}`}
       onClick={onClick}
     >
       {text}
+      {icon}
     </button>
   );
 };

@@ -57,11 +57,14 @@ const CreateClient = () => {
       },
     };
 
-    
-    console.log(variables.createClientInput.subClients.map((i) => console.log(i)));
+    console.log(
+      variables.createClientInput.subClients.map((i) =>
+        console.log(i)
+      )
+    );
     try {
       const mutate = await create({ variables });
-      console.log(mutate)
+      console.log(mutate);
     } catch (error) {
       console.log(error);
     }
@@ -162,7 +165,10 @@ const CreateClient = () => {
 
           <div>
             {subclients?.map((sub) => (
-              <p className="bg-green-300 m-1 p-1 rounded-full flex items-center justify-center font-medium">
+              <p
+                key={sub.name}
+                className="bg-green-300 m-1 p-1 rounded-full flex items-center justify-center font-medium"
+              >
                 {sub.name}
               </p>
             ))}

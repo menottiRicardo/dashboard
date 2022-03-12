@@ -85,15 +85,10 @@ export const CreateEmployee = extendType({
         if (args.shirts) {
           newEmployee.shirts = args.shirts;
         }
-        if (args.boots) {
-          newEmployee.boots = args.boots;
-        }
-        if (args.paid) {
-          newEmployee.paid = args.paid;
-        }
-        if (args.casco) {
-          newEmployee.paid = args.casco;
-        }
+        newEmployee.boots = args.boots;
+        newEmployee.paid = args.paid;
+        newEmployee.paid = args.casco;
+
         return await ctx.prisma.employee.create({
           data: newEmployee,
         });

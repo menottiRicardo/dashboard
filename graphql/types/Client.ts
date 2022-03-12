@@ -110,6 +110,30 @@ export const DeleteClient = extendType({
         id: nonNull(stringArg()),
       },
       async resolve(_parent, args, ctx) {
+        const deletecl = await ctx.prisma.subClient.deleteMany({
+          where: {
+            clientId: args.id,
+          },
+        });
+        return await ctx.prisma.client.delete({
+          where: {
+            id: args.id,
+          },
+        });
+      },
+    });
+  },
+});
+
+export const UpdateClient = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("updateClient", {
+      type: "Client",
+      args: {
+        id: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, ctx) {
         return await ctx.prisma.client.delete({
           where: {
             id: args.id,
