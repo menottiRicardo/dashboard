@@ -22,6 +22,7 @@ export const CreateDescarga = extendType({
         subId: stringArg(),
         employess: list(stringArg()),
         client: stringArg(),
+        day: stringArg(),
       },
       async resolve(_parent, args, ctx) {
         return await ctx.prisma.descarga.create({
@@ -30,6 +31,7 @@ export const CreateDescarga = extendType({
             client: args.client,
             employee: args.employess,
             subId: args.subId,
+            day: args.day,
           },
         });
       },

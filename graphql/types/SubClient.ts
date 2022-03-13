@@ -41,7 +41,6 @@ export const CreateSubClient = extendType({
           subClients: {
             create: {
               name: args.name,
-              clientId: args.clientId,
             },
           },
         };
