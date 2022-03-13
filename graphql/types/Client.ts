@@ -70,7 +70,7 @@ export const CreateClient = extendType({
           name: args.createClientInput.name,
           location: args.createClientInput.location,
           image: args.createClientInput.image,
-          subclients: {
+          subClients: {
             create: args.createClientInput.subClients,
           },
         };
