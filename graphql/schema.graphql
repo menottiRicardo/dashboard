@@ -15,6 +15,14 @@ A date string, such as 2007-12-03, compliant with the `full-date` format outline
 """
 scalar Date
 
+type Descarga {
+  client: String
+  createdAt: Date
+  employee: [String]
+  subClient: String
+  subId: String
+}
+
 type Employee {
   boots: Boolean
   casco: Boolean
@@ -31,11 +39,13 @@ type Employee {
 
 type Mutation {
   createClient(createClientInput: createClientInput): Client!
+  createDescarga(client: String, employess: [String], subClient: String, subId: String): Descarga!
   createEmployee(boots: Boolean, casco: Boolean, cedula: String!, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
   createSubClient(clientId: String!, name: String!): Subclient!
   deleteClient(id: String!): Client!
   deleteEmployee(id: String!): Employee!
   updateClient(id: String!): Client!
+  updateDescarga(client: String, employess: [String], subClient: String, subId: String): Descarga!
   updateEmployee(boots: Boolean, casco: Boolean, cedula: String!, id: String, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
 }
 
@@ -44,6 +54,7 @@ type Query {
   allEmployees: [Employee]!
   allSubclients: [Subclient]!
   client(id: String!): Client!
+  descargas: [Descarga]!
   employee(id: String!): Employee!
   subclient(id: String!): Subclient!
 }

@@ -8,3 +8,4 @@ export const GQLDate = decorateType(GraphQLDate, {
 export * from './Employee'
 export * from './Client'
 export * from './SubClient'
+export * from './Descarga'

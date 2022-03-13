@@ -9,7 +9,7 @@ import {
   XCircleIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import Sheet from "react-modal-sheet";
 import Button from "../Button";
 
@@ -46,6 +46,7 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
     };
 
     const mutate = await create({ variables });
+    setOpen
     console.log("mutate", mutate);
   };
 

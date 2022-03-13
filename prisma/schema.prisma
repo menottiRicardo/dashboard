@@ -11,9 +11,9 @@ datasource db {
 }
 
 model Employee {
-  id        String     @id @default(uuid())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   name      String
   lastname  String
   cedula    String
@@ -23,16 +23,17 @@ model Employee {
   boots     Boolean?
   paid      Boolean?
   casco     Boolean?
-  descargas Descarga[]
+  descargas String[]
 }
 
 model Descarga {
-  id        String     @id @default(uuid())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   client    String
   subClient String
-  employees Employee[]
+  employee  String[]
+  subId     String?
 }
 
 model Client {

@@ -38,7 +38,7 @@ export const CreateSubClient = extendType({
       },
       async resolve(__parent, args, ctx) {
         const data = {
-          subclients: {
+          subClients: {
             create: {
               name: args.name,
               clientId: args.clientId,
