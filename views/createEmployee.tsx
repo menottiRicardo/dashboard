@@ -116,6 +116,7 @@ const CreateEmployee = () => {
               type="text"
               name="name"
               placeholder="Ricardo"
+              autoComplete="off"
               className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.name}
               onChange={(e) =>
@@ -133,6 +134,7 @@ const CreateEmployee = () => {
               type="text"
               name="lastname"
               placeholder="Menotti"
+              autoComplete="off"
               className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.lastname}
               onChange={(e) =>
@@ -149,6 +151,7 @@ const CreateEmployee = () => {
             <input
               type="text"
               name="cedula"
+              autoComplete="off"
               placeholder="8-957-2190"
               className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.cedula}
@@ -166,6 +169,7 @@ const CreateEmployee = () => {
             <input
               type="text"
               name="phone"
+              autoComplete="off"
               placeholder="63760173"
               className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.phone}
@@ -183,6 +187,7 @@ const CreateEmployee = () => {
             <input
               type="text"
               name="location"
+              autoComplete="off"
               placeholder="Las Cumbres"
               className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={employee.location}

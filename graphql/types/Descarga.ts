@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { arg, extendType, list, objectType, stringArg } from "nexus";
 import { Employee } from ".";
 

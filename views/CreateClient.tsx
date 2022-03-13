@@ -2,7 +2,6 @@ import { gql, useMutation } from "@apollo/client";
 import { PlusIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import Button from "../components/Button";
-import { SubClient } from "../graphql/types";
 
 const CreateClient = () => {
   const [client, setClient] = useState({
@@ -115,8 +114,9 @@ const CreateClient = () => {
               type="text"
               name="name"
               placeholder="Metroclean Services"
-              className="border-3 border-blue-600 ml-1 outline-none mb-3"
+              className="border-3 border-blue-600 ml-1 outline-none mb-3 w-9/12"
               value={client.name}
+              autoComplete="off"
               onChange={(e) =>
                 handleInputs(e.target.name, e.target.value)
               }
@@ -132,6 +132,7 @@ const CreateClient = () => {
               type="text"
               name="location"
               placeholder="Panama Pacifico"
+              autoComplete="off"
               className="border-3 border-blue-600 ml-1 outline-none mb-3 w-8/12"
               value={client.location}
               onChange={(e) =>
@@ -149,6 +150,7 @@ const CreateClient = () => {
               <input
                 type="text"
                 name="subclient"
+                autoComplete="off"
                 placeholder="Pozuelo"
                 className="border-3 border-blue-600 ml-1 outline-none mb-3 w-8/12"
                 value={client.subclient}
