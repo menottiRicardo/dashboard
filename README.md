@@ -10,7 +10,7 @@ Dashboard for a client to keep track of employees, clients, accounting and more.
 ![caption](https://s3.us-west-2.amazonaws.com/menottin.com/features.gif)
 
 
-### Author
+## Author
 Ricardo Menotti
 
 
