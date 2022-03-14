@@ -71,7 +71,7 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
         <Sheet.Container>
           <Sheet.Header />
           <Sheet.Content>
-            <div className="p-2">
+            <div className="p-1">
               <div className="flex px-2">
                 <div className="w-1/4">
                   <h1 className="font-black text-2xl">
@@ -126,8 +126,8 @@ const BottomSheet = ({ isOpen, setOpen, client }: Props) => {
                 <ClipboardListIcon className="w-5" />
               </div>
               {client?.subClients?.map((sub) => (
-                <div key={sub.id} className="flex space-x-1">
-                  <PuzzleIcon className="w-5 text-black" />
+                <div key={sub.id} className="flex ">
+                  <PuzzleIcon className="w-5 text-black mr-1" />
                   <p className="text-gray-700" >
                     {sub.name}
                   </p>
