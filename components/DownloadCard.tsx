@@ -9,11 +9,11 @@ interface DownloadCardProps {
 const DownloadCard = ({ title, code }: DownloadCardProps) => {
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const bg = show ? "bg-blueGray-100" : "bg-white";
+  const bg = show ? "bg-white" : "bg-gray-50";
   return (
     <div
       className={`${bg} m-2 rounded p-2 grid grid-cols-2 items-center shadow-md justify-items-center`}
-      onClick={() => setShow(true)}
+      onClick={() => setShow(!show)}
     >
       {/* download name */}
       <h1 className="font-medium text-lg">{title}</h1>

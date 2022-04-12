@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { createContext } from "../graphql/context";
 import { initializeApollo } from "../lib/apollo";
-import CreateEmployee from "../views/createEmployee";
 
 const BottomSheet = dynamic(
   () => import("../components/employee/BottomSheet")
@@ -40,10 +39,10 @@ const Empleados = () => {
   console.log(id);
 
   if (loading) return <p>loading....</p>;
-  console.log(showBottom);
+  ;
   return (
     <div className="bg-gray-50 h-screen">
-      <CreateEmployee />
+    
       <div className="layout pt-5">
         <Table data={data} setId={setId} />
         {showBottom && (

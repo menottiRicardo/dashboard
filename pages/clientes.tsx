@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { ClientCard } from "../components/ClientCard";
-import CreateClient from "../views/CreateClient";
+
 
 const queryAllClients = gql`
   query {
@@ -19,11 +19,10 @@ const queryAllClients = gql`
 `;
 const Clientes = () => {
   const { data, error, loading } = useQuery(queryAllClients);
-  console.log(data);
   if (loading) {
     return (
       <div className="bg-gray-50">
-        <CreateClient />
+       
         <div className="layout">
           <h1 className="font-black text-3xl">Clientes</h1>
           <div className="bg-white rounded-xl shadow-md mt-4 relative animate-pulse">
@@ -68,7 +67,7 @@ const Clientes = () => {
   }
   return (
     <div className="bg-gray-50">
-      <CreateClient />
+     
       <div className="layout">
         <h1 className="font-black text-3xl">Clientes</h1>
         {data?.allClients?.map((client) => (

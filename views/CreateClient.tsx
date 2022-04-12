@@ -1,5 +1,8 @@
 import { gql, useMutation } from "@apollo/client";
-import { PlusIcon } from "@heroicons/react/outline";
+import {
+  OfficeBuildingIcon,
+  PlusIcon,
+} from "@heroicons/react/outline";
 import { useState } from "react";
 import Button from "../components/Button";
 
@@ -83,14 +86,14 @@ const CreateClient = () => {
   };
   if (close) {
     return (
-      <div className="flex items-center justify-center pt-4 bg-transparent">
-        <Button
-          color="bg-green-700"
-          border=""
-          text={"Registar"}
-          textColor="text-white"
-          onClick={() => setClose(false)}
-        />
+      <div className="flex justify-between w-full bg-white p-2 rounded-xl" onClick={() => setClose(false)}>
+        <a
+          className="hover:bg-gray-700 cursor-pointer hover:text-white rounded-full p-2"
+          
+        >
+          Cliente
+        </a>
+        <OfficeBuildingIcon className="w-6" />
       </div>
     );
   }

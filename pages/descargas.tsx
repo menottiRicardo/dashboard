@@ -1,11 +1,11 @@
 
 import DownloadCard from "../components/DownloadCard";
-import Createdownload from "../views/Createdownload";
+
 
 const Descargas = () => {
   return (
     <div className="bg-gray-50">
-      <Createdownload />
+     
 
       {/* week days */}
       <div className="layout">

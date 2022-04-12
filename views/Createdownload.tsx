@@ -1,3 +1,4 @@
+import { FolderAddIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
@@ -25,13 +26,14 @@ const Createdownload = () => {
   };
   return (
     <>
-      <div className="flex items-center justify-center pt-2 layout">
-        <Button
-          color="bg-blueGray-900"
-          text="Registrar Descarga"
-          textColor="text-white"
-          onClick={() => setShowRegisterModal(true)}
-        />
+      <div className="flex justify-between w-full bg-white p-2 rounded-xl" onClick={() => setShowRegisterModal(!showRegisterModal)}>
+        <a
+          className="hover:bg-gray-700 cursor-pointer hover:text-white rounded-full p-2"
+          
+        >
+          Descarga
+        </a>
+        <FolderAddIcon className="w-6" />
       </div>
       {showRegisterModal && (
         <div className="fixed w-full h-full bg-black flex items-center justify-center bg-opacity-90 z-50 select-none px-4 inset-0">

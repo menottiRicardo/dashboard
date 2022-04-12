@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { PlusIcon } from "@heroicons/react/outline";
+import { PlusIcon, UserAddIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import Button from "../components/Button";
 
@@ -86,15 +86,14 @@ const CreateEmployee = () => {
   };
   if (close) {
     return (
-      <div className="flex items-center justify-center pt-4 bg-transparent">
-        <Button
-          color="bg-green-700"
-          border=""
-          text={"Registar"}
-          textColor="text-white"
-          onClick={() => setOpen(false)}
-          icon={<PlusIcon className="w-5 text-white ml-2" />}
-        />
+      <div className="flex justify-between w-full bg-white p-2 rounded-xl"  onClick={() => setOpen(!close)}>
+        <a
+          className="hover:bg-gray-700 cursor-pointer hover:text-white rounded-full p-2"
+         
+        >
+          Empleado
+        </a>
+        <UserAddIcon className="w-6" />
       </div>
     );
   }
