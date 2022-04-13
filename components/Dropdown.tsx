@@ -14,9 +14,7 @@ const Dropdown = ({
   return (
     <div className="relative">
       <button
-        id="dropdownButton"
-        data-dropdown-toggle="dropdown"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center w-full flex justify-center items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-black bg-blue-300 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center w-full flex justify-center items-center"
         type="button"
         onClick={() => setShow(!show)}
       >
