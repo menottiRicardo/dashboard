@@ -1,9 +1,13 @@
 import { gql, useQuery } from "@apollo/client";
-import { FolderAddIcon, SearchIcon } from "@heroicons/react/outline";
+import {
+  FolderAddIcon,
+  SearchIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 import React, { useState } from "react";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
-
+import DateInput from "../components/DateInput";
 const AllEmployeesQuery = gql`
   query {
     allEmployees {
@@ -14,18 +18,31 @@ const AllEmployeesQuery = gql`
   }
 `;
 
+const AllSubclientsQuery = gql`
+  query AllSubclients {
+    allSubclients {
+      id
+      name
+    }
+  }
+`;
+
 const Createdownload = () => {
-  const { data, error, loading } = useQuery(AllEmployeesQuery);
-  console.log(data);
-  const [client, setClient] = useState("pozuelo");
+  const employees = useQuery(AllEmployeesQuery);
+  const subclients = useQuery(AllSubclientsQuery);
+  console.log(employees, subclients);
+  const [client, setClient] = useState(
+    subclients?.data?.allSubclients[0]?.name
+  );
+  const [dateValue, _dateValue] = useState(new Date());
   const [selected, setSelected] = useState([]);
   const [selectList, setSelectList] = useState([]);
-  const [showRegisterModal, setShowRegisterModal] = useState(true);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   //
   const searchEmployee = async (name: string) => {
     if (name === "") return setSelectList([]);
-    const searchByFirstName = data.allEmployees.filter((employee) =>
-      employee.name.toLowerCase().includes(name)
+    const searchByFirstName = employees.data.allEmployees.filter(
+      (employee) => employee.name.toLowerCase().includes(name)
     );
 
     setSelectList(searchByFirstName);
@@ -40,6 +57,14 @@ const Createdownload = () => {
     setClient("");
     setShowRegisterModal(false);
   };
+
+  const deleteEmployee = (id: string) => {
+    const filtered = selected.filter(
+      (employee: any) => employee.id !== id
+    );
+    setSelected(filtered);
+  };
+
   return (
     <>
       <div
@@ -53,15 +78,20 @@ const Createdownload = () => {
       </div>
       {showRegisterModal && (
         <div className="fixed w-full h-full bg-black flex items-center justify-center bg-opacity-90 z-50 select-none px-4 inset-0">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 rounded-md shadow-xl px-2 py-3 grid select-none bg-gray-100">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-11/12 rounded-md shadow-xl px-2 py-3 grid select-none bg-gray-100">
             {/* text */}
             {/* Select client */}
-
+            <h1 className="font-bold text-xl p-2">Guardar Descarga</h1>
+            <p className="text-gray-700">Seleciona el sub cliente:</p>
             <Dropdown
               initialValue={client}
-              values={["pozuelo", "pabo", "avon"]}
+              values={subclients.data.allSubclients}
               setValue={setClient}
             />
+
+            <p className="text-gray-700 pt-4">
+              Selecione los empleados:
+            </p>
             <div className="relative w-full">
               <div className="bg-white mt-2 px-2 rounded-full flex justify-between">
                 <SearchIcon className="w-5" />{" "}
@@ -73,7 +103,7 @@ const Createdownload = () => {
               </div>
               {/* <div className="bg-gray-100 mt-3 absolute p-2"> */}
               {selectList.length > 0 && (
-                <div className="bg-slate-200 mt-3 absolute p-2 w-9/12 shadow-lg rounded-md">
+                <div className="bg-slate-200 mt-3 absolute p-2 w-9/12 shadow-lg rounded-md z-10">
                   {selectList.map((emp) => (
                     <p
                       key={emp.id}
@@ -91,17 +121,26 @@ const Createdownload = () => {
               {selected.length > 0 && (
                 <div className="bg-white mt-3 p-2 shadow-xl rounded-md">
                   {selected.map((emp) => (
-                    <p
-                      key={emp.id}
-                      onClick={() => selectEmployee(emp)}
-                      className="bg-gray-200 rounded-xl p-2 my-2 shadow-md"
-                    >
-                      {emp.name} {emp.lastname}
-                    </p>
+                    <div className="flex justify-between">
+                      <p
+                        key={emp.id}
+                        onClick={() => selectEmployee(emp)}
+                        className="p-2 text-primary-600 font-medium"
+                      >
+                        {emp.name} {emp.lastname}
+                      </p>
+                      <div
+                        className="p-2"
+                        onClick={() => deleteEmployee(emp.id)}
+                      >
+                        <XIcon className="w-5 text-red-600" />
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
             </div>
+            <DateInput selected={dateValue} _selected={_dateValue} />
 
             <div className="flex justify-around items-center mt-4">
               <Button

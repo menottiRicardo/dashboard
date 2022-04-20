@@ -13,8 +13,9 @@ const Dropdown = ({
   const [show, setShow] = useState(false);
   return (
     <div className="relative">
+      
       <button
-        className="text-black bg-blue-300 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center w-full flex justify-center items-center"
+        className="text-black bg-primary-600  focus:ring-4 focus:ring-primary-400 font-medium rounded-lg text-sm px-4 py-2.5 text-center w-full flex justify-center items-center"
         type="button"
         onClick={() => setShow(!show)}
       >
@@ -28,44 +29,21 @@ const Dropdown = ({
           className="absolute z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 mt-2"
         >
           <ul className="py-1" aria-labelledby="dropdownButton">
-            {values.map((val) => (
+            {values.map((val: any) => (
               <li
-                key={val}
-                onClick={() => (setShow(false), setValue(val))}
+                key={val.id}
+                onClick={() => (setShow(false), setValue(val.name))}
               >
                 <a
                   href="#"
                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  {val}
+                  {val.name}
                 </a>
               </li>
             ))}
 
-            {/* <li>
-              <a
-                href="#"
-                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              >
-                Settings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              >
-                Earnings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              >
-                Sign out
-              </a>
-            </li> */}
+            
           </ul>
         </div>
       )}

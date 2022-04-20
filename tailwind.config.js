@@ -10,6 +10,15 @@ module.exports = {
     colors: {
       ...colors,
     },
+    extend: {
+      colors: {
+        primary: {
+          400: "#FE7A00",
+          500: "#F7F7F7",
+          600: "#F87700",
+        },
+      },
+    },
   },
   plugins: [],
 };

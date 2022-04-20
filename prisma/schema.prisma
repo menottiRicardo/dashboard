@@ -23,7 +23,6 @@ model Employee {
   boots     Boolean?
   paid      Boolean?
   casco     Boolean?
-  descargas String[]
 }
 
 model Descarga {
