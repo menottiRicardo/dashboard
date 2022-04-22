@@ -39,7 +39,7 @@ type Employee {
 
 type Mutation {
   createClient(createClientInput: createClientInput): Client!
-  createDescarga(client: String, day: String, employess: [String], subClient: String, subId: String): Descarga!
+  createDescarga(clientId: String, day: String, employees: [String], subClientId: String): Descarga!
   createEmployee(boots: Boolean, casco: Boolean, cedula: String!, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
   createSubClient(clientId: String!, name: String!): Subclient!
   deleteClient(id: String!): Client!

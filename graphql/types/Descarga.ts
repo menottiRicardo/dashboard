@@ -19,19 +19,27 @@ export const CreateDescarga = extendType({
     t.nonNull.field("createDescarga", {
       type: "Descarga",
       args: {
-        subClient: stringArg(),
-        subId: stringArg(),
-        employess: list(stringArg()),
-        client: stringArg(),
+        subClientId: stringArg(),
+        employees: list(stringArg()),
+        clientId: stringArg(),
         day: stringArg(),
       },
       async resolve(_parent, args, ctx) {
+        const data = {
+          subClientId: args.subClientId,
+          clientId: args.clientId,
+          employees: {
+            connect: args.employees.map((emp) => ({ id: emp })),
+          },
+          day: args.day,
+        };
         return await ctx.prisma.descarga.create({
           data: {
-            subClient: args.subClient,
-            client: args.client,
-            employee: args.employess,
-            subId: args.subId,
+            subClientId: args.subClientId,
+            clientId: args.clientId,
+            employees: {
+              connect: args.employees.map((emp) => ({ id: emp })),
+            },
             day: args.day,
           },
         });

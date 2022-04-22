@@ -1,0 +1,37 @@
+
+interface DbSchema = {
+    categorias: {
+        
+        SucursalID: String
+    };
+    platos: {
+        ingredientes
+        categoriaID
+        description
+        imagen
+        precio
+        status
+    },
+    "orden": {
+        status: pagada
+        platos: {
+            qty:
+            id:
+        },
+        createdAt:
+        updatedAt:
+        mesa:
+    }
+    "sucursal": {
+        ubicacion:
+        nombre:
+        horario:
+        disponibilidad:
+        ocupacion: 
+    }
+    "restaurante": {
+        nombre: string
+        sucursales: sucursal[]
+    }
+
+}
