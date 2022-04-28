@@ -16,11 +16,12 @@ A date string, such as 2007-12-03, compliant with the `full-date` format outline
 scalar Date
 
 type Descarga {
-  client: String
+  clientId: String
   createdAt: Date
-  employee: [String]
-  subClient: String
-  subId: String
+  day: String
+  employees: [Employee]
+  id: String
+  subClientId: String
 }
 
 type Employee {
@@ -45,7 +46,6 @@ type Mutation {
   deleteClient(id: String!): Client!
   deleteEmployee(id: String!): Employee!
   updateClient(id: String!): Client!
-  updateDescarga(client: String, employess: [String], subClient: String, subId: String): Descarga!
   updateEmployee(boots: Boolean, casco: Boolean, cedula: String!, id: String, lastname: String!, location: String, name: String!, paid: Boolean, phone: String, shirts: Int): Employee!
 }
 

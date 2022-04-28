@@ -23,8 +23,7 @@ model Employee {
   boots      Boolean?
   paid       Boolean?
   casco      Boolean?
-  Descarga   Descarga? @relation(fields: [descargaId], references: [id])
-  descargaId String?
+  descargas  Descarga[]
 }
 
 model Descarga {
